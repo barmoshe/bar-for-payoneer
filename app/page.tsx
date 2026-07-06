@@ -26,7 +26,7 @@ const sans = Mulish({
 // link.
 const ogTitle = "Bar Moshe × Payoneer";
 const ogDescription =
-  "I'm applying to Payoneer with a working site instead of a CV, in Payoneer's own visual language. Real shipped work, live links.";
+  "I'm applying to Payoneer, in Payoneer's own visual language: ten shipped builds, no wire transfer required.";
 
 export const metadata: Metadata = {
   title: ogTitle,

@@ -476,7 +476,7 @@ export default function PayoneerApp() {
           <div className="pay-hero-inner">
             <span className="pay-hero-eyebrow">Application · Payoneer</span>
             <h1 id="pay-hero-h">
-              A working site for Payoneer, instead of a CV.
+              Ten shipped builds. No wire transfer required.
             </h1>
             <p>
               I&apos;m Bar Moshe, a full-stack and AI builder. This whole page is

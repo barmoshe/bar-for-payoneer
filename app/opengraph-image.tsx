@@ -7,7 +7,7 @@ import { ImageResponse } from 'next/og';
 // Rendered by next/og (Satori): flexbox-only CSS, plain hex colours.
 
 export const alt =
-  'Bar Moshe for Payoneer — a working site instead of a CV, in Payoneer\'s own visual language. Real shipped work, live links.';
+  'Bar Moshe for Payoneer — ten shipped builds, no wire transfer required, in Payoneer\'s own visual language. Real shipped work, live links.';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -89,7 +89,7 @@ export default function Image() {
               maxWidth: 900,
             }}
           >
-            A working site instead of a CV
+            Ten shipped builds. No wire transfer required.
           </div>
           <div style={{ display: 'flex', fontSize: 34, color: '#5a6570' }}>
             Real shipped work, live links, built for Payoneer.
