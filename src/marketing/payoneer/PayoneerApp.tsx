@@ -31,7 +31,7 @@ import './payoneer.css';
  */
 
 const EMAIL = 'mailto:1barmoshe1@gmail.com?subject=bar-for-payoneer';
-const CV = '/Bar_Moshe_Resume.pdf';
+const CV = '/Bar_Moshe_CV_Payoneer.pdf';
 const LINKEDIN = 'https://www.linkedin.com/in/barmoshe/';
 const GITHUB = 'https://github.com/barmoshe';
 const WHATSAPP = 'https://wa.me/972546561465';
