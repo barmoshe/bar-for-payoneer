@@ -1,0 +1,770 @@
+/* =============================================================
+   payoneer.css — bar-for-payoneer, in Payoneer's real visual language,
+   read live off payoneer.com (2026-07-06).
+
+   Tokens from the live read:
+     white     #ffffff   the whole canvas is clean white
+     ink       #212529   headings + body
+     gray      #5a6570   secondary text
+     violet    #7b3fe4   CTA / accent
+     violet-2  #9d5ce6   CTA gradient end
+     indigo    #3D2E7C   the "meet" band
+     ring green/blue/purple/magenta:
+       #3fd07f  #1f9bde  #7b3fe4  #e0409b   the rainbow orbit gradient
+   The signature graphic is the rainbow ring (the multicolor logo "O").
+   Type: proprietary "Avenir Next World" there; Mulish (a faithful free
+   geometric-humanist) here.
+   ============================================================= */
+
+.pay-root {
+  --pay-white: #ffffff;
+  --pay-ink: #212529;
+  --pay-gray: #5a6570;
+  --pay-violet: #7b3fe4;
+  --pay-violet-2: #9d5ce6;
+  --pay-indigo: #3d2e7c;
+  --pay-blue: #1f9bde;
+  --pay-green: #3fd07f;
+  --pay-magenta: #e0409b;
+  --pay-tile-bg: #f4f1fb;
+  --pay-divider: rgba(33, 37, 41, 0.1);
+  --pay-divider-dark: rgba(255, 255, 255, 0.16);
+
+  --pay-grad: linear-gradient(90deg, #7b3fe4, #9d5ce6);
+  --pay-ring: linear-gradient(90deg, #3fd07f, #1f9bde, #7b3fe4, #e0409b);
+
+  --pay-font: var(--font-pay-sans), 'Mulish', 'Avenir Next', Helvetica, Arial, sans-serif;
+
+  background: var(--pay-white);
+  color: var(--pay-ink);
+  font-family: var(--pay-font);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+/* Explicit h1/h2/h3 selectors (not :where) so these beat the `.mp-root
+   h1/h2/h3` typography block in marketing-base.css — same 0-1-1
+   specificity, later in the cascade (payoneer.css is imported after
+   marketing-base.css). */
+.pay-root h1,
+.pay-root h2,
+.pay-root h3 {
+  font-family: var(--pay-font);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  margin: 0;
+  color: var(--pay-ink);
+}
+.pay-root h1 {
+  font-weight: 700;
+  font-size: clamp(2.1rem, 5vw, 3rem);
+  letter-spacing: -0.025em;
+}
+.pay-root h2 {
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+}
+.pay-root h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+.pay-root p {
+  margin: 0;
+}
+
+.pay-root :where(button, a):focus-visible {
+  outline: 3px solid var(--pay-violet);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* ---------------------------------------------------------------
+   Reveal-on-scroll
+   --------------------------------------------------------------- */
+.pay-root [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.22, 0.9, 0.3, 1);
+}
+.pay-root [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pay-root [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Buttons / links
+   --------------------------------------------------------------- */
+.pay-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.98rem;
+  text-decoration: none;
+  padding: 13px 28px;
+  border-radius: 999px;
+  border: none;
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    filter 0.16s ease;
+}
+.pay-pill span {
+  transition: transform 0.16s ease;
+}
+.pay-pill:hover span {
+  transform: translateX(3px);
+}
+.pay-pill-grad {
+  background: var(--pay-grad);
+  box-shadow: 0 10px 24px rgba(123, 63, 228, 0.28);
+}
+.pay-pill-grad:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(123, 63, 228, 0.36);
+}
+.pay-pill-violet {
+  background: var(--pay-violet);
+}
+.pay-pill-violet:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+.pay-pill-lg {
+  padding: 16px 34px;
+  font-size: 1.04rem;
+}
+
+.pay-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--pay-violet);
+  font-weight: 700;
+  text-decoration: none;
+}
+.pay-link span {
+  transition: transform 0.16s ease;
+}
+.pay-link:hover span {
+  transform: translateX(3px);
+}
+
+.pay-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--pay-violet);
+}
+
+/* ---------------------------------------------------------------
+   Nav
+   --------------------------------------------------------------- */
+.pay-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--pay-divider);
+}
+.pay-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.pay-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--pay-ink);
+}
+.pay-mark-glyph {
+  display: flex;
+  width: 26px;
+  height: 26px;
+}
+.pay-mark-glyph svg {
+  width: 100%;
+  height: 100%;
+}
+.pay-wordmark {
+  font-size: 1.12rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.pay-nav-links {
+  display: flex;
+  gap: 24px;
+}
+.pay-nav-links a {
+  color: var(--pay-ink);
+  text-decoration: none;
+  font-size: 0.94rem;
+  font-weight: 600;
+  opacity: 0.78;
+}
+.pay-nav-links a:hover {
+  opacity: 1;
+  color: var(--pay-violet);
+}
+.pay-nav-cta {
+  margin-left: auto;
+}
+
+@media (max-width: 720px) {
+  .pay-nav-links {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Hero: centered headline inside the rainbow orbit
+   --------------------------------------------------------------- */
+.pay-hero {
+  position: relative;
+  background: var(--pay-white);
+  overflow: hidden;
+  padding: clamp(64px, 11vw, 132px) 24px clamp(72px, 12vw, 140px);
+}
+.pay-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+}
+.pay-hero-eyebrow {
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--pay-violet);
+}
+.pay-hero-inner h1 {
+  max-width: 16ch;
+}
+.pay-hero-inner p {
+  color: var(--pay-gray);
+  font-size: 1.12rem;
+  max-width: 52ch;
+}
+.pay-hero-cta {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* the rainbow orbit centerpiece */
+.pay-orbit {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: min(680px, 116vw);
+  height: min(680px, 116vw);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.pay-orbit-svg {
+  width: 100%;
+  height: 100%;
+  animation: pay-spin 60s linear infinite;
+}
+@keyframes pay-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pay-orb {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  box-shadow: 0 6px 16px rgba(33, 37, 41, 0.16);
+  animation: pay-float 6s ease-in-out infinite;
+}
+.pay-orb-1 {
+  top: 8%;
+  left: 30%;
+  background: var(--pay-green);
+}
+.pay-orb-2 {
+  top: 22%;
+  right: 8%;
+  background: var(--pay-blue);
+  animation-delay: -1.5s;
+}
+.pay-orb-3 {
+  bottom: 16%;
+  right: 24%;
+  background: var(--pay-violet);
+  animation-delay: -3s;
+}
+.pay-orb-4 {
+  bottom: 10%;
+  left: 16%;
+  background: var(--pay-magenta);
+  animation-delay: -4.5s;
+}
+@keyframes pay-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pay-orbit-svg,
+  .pay-orb {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Feature cards (why hire Bar)
+   --------------------------------------------------------------- */
+.pay-features {
+  background: var(--pay-white);
+  padding: clamp(48px, 8vw, 96px) 24px;
+}
+.pay-features-head {
+  max-width: 1200px;
+  margin: 0 auto clamp(32px, 5vw, 52px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.pay-sub {
+  color: var(--pay-gray);
+  font-size: 1.08rem;
+  max-width: 56ch;
+}
+.pay-cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.pay-card {
+  position: relative;
+  background: var(--pay-white);
+  border: 1px solid var(--pay-divider);
+  border-radius: 22px;
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(33, 37, 41, 0.05);
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease;
+}
+.pay-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(123, 63, 228, 0.12);
+}
+.pay-card-icon {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  padding: 8px;
+  border-radius: 12px;
+  color: #ffffff;
+  background: var(--pay-grad);
+}
+.pay-card-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.pay-card-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--pay-gray);
+}
+.pay-soon {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(31, 155, 222, 0.14);
+  color: var(--pay-blue);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+.pay-card h3 {
+  color: var(--pay-ink);
+}
+.pay-card p {
+  color: var(--pay-gray);
+  font-size: 1rem;
+}
+
+@media (max-width: 860px) {
+  .pay-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Meet Bar: deep-indigo band with the rainbow-ring tile
+   --------------------------------------------------------------- */
+.pay-meet {
+  background: var(--pay-indigo);
+  color: #ffffff;
+  padding: clamp(48px, 8vw, 96px) 24px;
+}
+.pay-meet-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: clamp(32px, 6vw, 72px);
+}
+.pay-meet-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.pay-meet-eyebrow {
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #c9bdf0;
+}
+.pay-meet-copy h2 {
+  color: #ffffff;
+  max-width: 18ch;
+}
+.pay-meet-copy p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.08rem;
+  max-width: 48ch;
+}
+.pay-meet-copy .pay-pill {
+  margin-top: 6px;
+}
+
+.pay-meet-media {
+  display: flex;
+  justify-content: center;
+}
+.pay-ringtile {
+  position: relative;
+  width: min(360px, 82vw);
+  aspect-ratio: 4 / 3;
+  border-radius: 28px;
+  background: linear-gradient(150deg, #efe9ff 0%, #ffe6f4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+.pay-ringtile-square {
+  width: 46%;
+  aspect-ratio: 1;
+  background: #ffffff;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 26px rgba(61, 46, 124, 0.18);
+}
+.pay-ringtile-square svg {
+  width: 70%;
+  height: 70%;
+}
+.pay-play {
+  position: absolute;
+  right: 16%;
+  bottom: 14%;
+  width: 54px;
+  height: 54px;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+}
+.pay-play svg {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 860px) {
+  .pay-meet-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .pay-meet-copy {
+    align-items: center;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Work grid
+   --------------------------------------------------------------- */
+.pay-work {
+  background: var(--pay-white);
+  padding: clamp(48px, 8vw, 96px) 24px;
+}
+.pay-work-head {
+  max-width: 1200px;
+  margin: 0 auto clamp(32px, 5vw, 52px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.pay-work-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.pay-work-card {
+  background: var(--pay-white);
+  border: 1px solid var(--pay-divider);
+  border-radius: 20px;
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease;
+}
+.pay-work-card:hover {
+  transform: translateY(-4px);
+  border-color: transparent;
+  box-shadow: 0 16px 36px rgba(123, 63, 228, 0.12);
+}
+.pay-work-glyph {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  padding: 6px;
+  border-radius: 10px;
+  color: var(--pay-violet);
+  background: var(--pay-tile-bg);
+}
+.pay-work-glyph svg {
+  width: 100%;
+  height: 100%;
+}
+.pay-work-tag {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pay-gray);
+}
+.pay-work-card h3 {
+  color: var(--pay-ink);
+}
+.pay-work-card .pay-link {
+  margin-top: auto;
+  padding-top: 6px;
+}
+.pay-work-note {
+  max-width: 62ch;
+  margin: clamp(28px, 4vw, 48px) auto 0;
+  text-align: center;
+  color: var(--pay-gray);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 860px) {
+  .pay-work-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Close: 4-up rounded tiles
+   --------------------------------------------------------------- */
+.pay-close {
+  background: var(--pay-white);
+  padding: clamp(48px, 8vw, 96px) 24px clamp(64px, 10vw, 116px);
+  border-top: 1px solid var(--pay-divider);
+}
+.pay-close-head {
+  max-width: 1200px;
+  margin: 0 auto clamp(28px, 4vw, 44px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.pay-close-head p {
+  color: var(--pay-gray);
+  font-size: 1.08rem;
+}
+.pay-tiles {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.pay-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--pay-tile-bg);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-decoration: none;
+  color: var(--pay-ink);
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease;
+}
+.pay-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(123, 63, 228, 0.18);
+}
+.pay-tile-icon {
+  display: flex;
+  width: 34px;
+  height: 34px;
+  color: var(--pay-violet);
+}
+.pay-tile-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.pay-tile-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--pay-violet);
+}
+
+@media (max-width: 960px) {
+  .pay-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 540px) {
+  .pay-tiles {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Footer
+   --------------------------------------------------------------- */
+.pay-footer {
+  background: var(--pay-indigo);
+  color: rgba(255, 255, 255, 0.72);
+  padding: clamp(40px, 6vw, 64px) 24px 34px;
+}
+.pay-footer-top {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--pay-divider-dark);
+}
+.pay-footer-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.24rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+.pay-footer-glyph {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+}
+.pay-footer-glyph svg {
+  width: 100%;
+  height: 100%;
+}
+.pay-footer-cols {
+  display: flex;
+  gap: 56px;
+  flex-wrap: wrap;
+}
+.pay-footer-cols nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pay-footer-col-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 4px;
+}
+.pay-footer-cols a {
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  font-size: 0.94rem;
+}
+.pay-footer-cols a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.pay-footer p {
+  max-width: 1200px;
+  margin: 24px auto 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+}
